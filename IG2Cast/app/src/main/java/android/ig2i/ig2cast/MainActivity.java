@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Declaring Your View and Variables
 
+    Toolbar mToolbar;
     Toolbar toolbar;
     ViewPager pager;
     ViewPagerAdapter adapter;
@@ -30,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
         //getSupportActionBar().hide();//Ocultar ActivityBar anterior
 
         // Creating The Toolbar and setting it as the Toolbar for the activity
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         //setSupportActionBar(toolbar);

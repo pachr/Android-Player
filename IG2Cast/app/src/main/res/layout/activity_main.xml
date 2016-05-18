@@ -22,30 +22,43 @@
     android:orientation="vertical"
     tools:context="android.ig2i.ig2cast.MainActivity">
 
-    <include
-        android:id="@+id/tool_bar"
-        layout="@layout/tool_bar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical">
 
-    <android.ig2i.ig2cast.SlidingTabLayout
-        android:id="@+id/tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="2dp"
-        android:background="@color/deepPink"/>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
-
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        ></android.support.v4.view.ViewPager>
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar" />
 
 
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+               <include
+                    android:id="@+id/tool_bar"
+                    layout="@layout/tool_bar"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    />
 
+                <android.ig2i.ig2cast.SlidingTabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/deepPink"
+                    />
+            </RelativeLayout>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            ></android.support.v4.view.ViewPager>
+        </LinearLayout>
 </RelativeLayout>
 
 

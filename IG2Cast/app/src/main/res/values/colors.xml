@@ -5,6 +5,9 @@
     <color name="colorAccent">#FF4081</color>
     <color name="tabsScrollColor">#8A140E</color>
 
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
+
     <color name="mediumVioletRed">#C71585</color>
     <color name="deepPink">#FF1493</color>
     <color name="hotPink">#FF69B4</color>
