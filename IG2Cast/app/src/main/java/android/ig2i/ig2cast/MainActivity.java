@@ -1,21 +1,27 @@
 package android.ig2i.ig2cast;
 
 
+import android.ig2i.ig2cast.activity.FragmentDrawer;
 import android.support.v4.view.ViewPager;
 //import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener{
 
     // Declaring Your View and Variables
 
+    private FragmentDrawer drawerFragment;
+
     Toolbar mToolbar;
+
     Toolbar toolbar;
     ViewPager pager;
     ViewPagerAdapter adapter;
@@ -28,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /*********************************************/
+        /*          MAIN TOOLBAR                     */
+        /*********************************************/
+
         //getSupportActionBar().hide();//Ocultar ActivityBar anterior
 
         // Creating The Toolbar and setting it as the Toolbar for the activity
@@ -36,6 +46,19 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
+        /*********************************************/
+        /*          MENU SLIDER RIGHT                */
+        /*********************************************/
+
+        drawerFragment = (FragmentDrawer)
+                getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
+        drawerFragment.setDrawerListener(this);
+
+
+        /*********************************************/
+        /*          TOOLBAR WITH SLIDER              */
+        /*********************************************/
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         //setSupportActionBar(toolbar);
@@ -85,5 +108,10 @@ public class MainActivity extends AppCompatActivity {
         }*/
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDrawerItemSelected(View view, int position) {
+
     }
 }
