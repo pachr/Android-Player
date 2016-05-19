@@ -13,7 +13,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,7 +61,6 @@ public class Tab1 extends Fragment {
         null);*/
 
 
-    private MediaPlayer mp = new MediaPlayer();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -104,32 +105,9 @@ public class Tab1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.tab_1,container,false);
 
-        Button stopPlay = (Button) v.findViewById(R.id.BtnStop);
-        stopPlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mp.stop();
-
-            }
-        });
-
-        Button startPlay = (Button) v.findViewById(R.id.BtnPlay);
-        startPlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mp.start();
-            }
-        });
 
         RecyclerView rv = (RecyclerView) v.findViewById(R.id.rv_recycler_view);
         rv.setHasFixedSize(true);
-
-        rv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mp.start();
-            }
-        });
 
 
 
@@ -174,6 +152,35 @@ public class Tab1 extends Fragment {
 
         MyAdapter adapter = new MyAdapter(songs);
         rv.setAdapter(adapter);
+
+        Button stopPlay = (Button) v.findViewById(R.id.BtnStop);
+        stopPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(MainActivity.MP.isPlaying()){
+                    MainActivity.MP.stop();
+                }
+            }
+        });
+
+        Button startPlay = (Button) v.findViewById(R.id.BtnPlay);
+        startPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(MainActivity.MP.isPlaying()){
+                    MainActivity.MP.pause();
+                    
+                }
+                else {
+                    MainActivity.MP.start();
+                }
+
+
+
+            }
+        });
+
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);

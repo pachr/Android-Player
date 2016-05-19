@@ -4,6 +4,8 @@ package android.ig2i.ig2cast;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 //import android.support.v7.app.ActionBarActivity;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     ViewPager pager;
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
+    public static MediaPlayer MP = new MediaPlayer();
     CharSequence Titles[]={"Artistes","Albums","Morceaux","Playlists","Genres"};
     int Numboftabs =5;
 
@@ -36,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         //getSupportActionBar().hide();//Ocultar ActivityBar anterior
 
@@ -124,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
             // permissions this app might request
         }
     }
+
 
 
 }

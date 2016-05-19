@@ -1,16 +1,26 @@
 package android.ig2i.ig2cast;
 
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.List;
+
+
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private List<String> mDataset;
+
+
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -25,8 +35,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             mTextView = (TextView) v.findViewById(R.id.tv_text);
 
             v.setOnClickListener(new View.OnClickListener(){
-                @Override
+
                 public void onClick(View v){
+                    String[] arrayText;
+                    arrayText = mTextView.getText().toString().split("\\|\\|");
+                    Toast.makeText(v.getContext(), arrayText[3], Toast.LENGTH_SHORT).show();
+
+                    try {
+                        MainActivity.MP.reset();
+                        MainActivity.MP.setDataSource(arrayText[3]);
+                        MainActivity.MP.prepare();
+                        MainActivity.MP.start();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
 
                 }
             });
