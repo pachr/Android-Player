@@ -23,6 +23,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
             mCardView = (CardView) v.findViewById(R.id.card_view);
             mTextView = (TextView) v.findViewById(R.id.tv_text);
+
+            v.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+
+                }
+            });
         }
     }
 

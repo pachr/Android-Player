@@ -15,11 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.support.v7.widget.RecyclerView;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +74,7 @@ public class Tab1 extends Fragment {
             for (File file : home.listFiles(new Mp3Filter())){
                 songs.add((String) file.getName());
             }
+
             //songs.add("coucou test");
         }*/
 
@@ -88,12 +91,41 @@ public class Tab1 extends Fragment {
         return songs;
     }
 
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.tab_1,container,false);
 
+        Button stopPlay = (Button) v.findViewById(R.id.BtnStop);
+        stopPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mp.stop();
+
+            }
+        });
+
+        Button startPlay = (Button) v.findViewById(R.id.BtnPlay);
+        startPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mp.start();
+            }
+        });
+
         RecyclerView rv = (RecyclerView) v.findViewById(R.id.rv_recycler_view);
         rv.setHasFixedSize(true);
+
+        rv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mp.start();
+            }
+        });
+
+
 
         ContentResolver cr = getActivity().getContentResolver();
 
@@ -114,6 +146,9 @@ public class Tab1 extends Fragment {
         songs = updateMusicList(cur);
         //MyAdapter adapter = new MyAdapter(new String[]{"test one", "test two", "test three", "test four", "test five" , "test six" , "test seven"});
         //songs.add(null);
+
+
+
         MyAdapter adapter = new MyAdapter(songs);
         rv.setAdapter(adapter);
 
