@@ -21,7 +21,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -82,12 +81,53 @@ public class Tab1 extends Fragment {
         }*/
 
         while(cur.moveToNext()) {
-            songs.add(cur.getString(0) + "||"
-                    + cur.getString(1) + "||"
-                    + cur.getString(2) + "||"
-                    + cur.getString(3) + "||"
-                    + cur.getString(4) + "||"
-                    + cur.getString(5));
+
+            if(String.valueOf(cur.getString(5)) != null){
+                try{
+                    Long time = Long.valueOf(cur.getString(5));
+                    long seconds = time/1000;
+                    long minutes = seconds/60;
+                    seconds = seconds % 60;
+
+                    if(seconds<10){
+                        String csongs_duration = String.valueOf(minutes) + ":0" + String.valueOf(seconds);
+
+                        songs.add(cur.getString(0) + "||"
+                                + cur.getString(1) + "||"
+                                + cur.getString(2) + "||"
+                                + cur.getString(3) + "||"
+                                + cur.getString(4) + "||"
+                                + csongs_duration);
+
+                    }else{
+                        String ccsongs_duration = String.valueOf(minutes) + ":" + String.valueOf(seconds);
+
+                        songs.add(cur.getString(0) + "||"
+                                + cur.getString(1) + "||"
+                                + cur.getString(2) + "||"
+                                + cur.getString(3) + "||"
+                                + cur.getString(4) + "||"
+                                + ccsongs_duration);
+
+                    }
+                }catch(NumberFormatException e){
+                    songs.add(cur.getString(0) + "||"
+                            + cur.getString(1) + "||"
+                            + cur.getString(2) + "||"
+                            + cur.getString(3) + "||"
+                            + cur.getString(4) + "||"
+                            + cur.getString(5));
+                }
+            }else{
+                String csongs_duration = "0";
+                songs.add(cur.getString(0) + "||"
+                        + cur.getString(1) + "||"
+                        + cur.getString(2) + "||"
+                        + cur.getString(3) + "||"
+                        + cur.getString(4) + "||"
+                        + csongs_duration);;
+            }
+
         }
 
         //File home = new File(SD_PATH);
@@ -126,6 +166,8 @@ public class Tab1 extends Fragment {
             }
         else{
                 // No explanation needed, we can request the permission.
+
+
 
                 // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
                 // app-defined int constant. The callback method gets the

@@ -17,12 +17,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     // you provide access to all the views for a data item in a view holder
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public CardView mCardView;
-        public TextView mTextView;
+        public TextView mTitleTextView;
+        public TextView mArtistTextView;
+        public TextView mDurationTextView;
         public MyViewHolder(View v) {
             super(v);
 
             mCardView = (CardView) v.findViewById(R.id.card_view);
-            mTextView = (TextView) v.findViewById(R.id.tv_text);
+            mTitleTextView = (TextView) v.findViewById(R.id.tv_title);
+            mArtistTextView = (TextView) v.findViewById(R.id.tv_artist);
+            mDurationTextView= (TextView) v.findViewById(R.id.tv_duration);
         }
     }
 
@@ -45,7 +49,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.mTextView.setText(mDataset.get(position));
+        String[] separated = mDataset.get(position).toString().split("\\|\\|");
+        holder.mArtistTextView.setText(separated[1]);
+        holder.mTitleTextView.setText(separated[2]);
+        holder.mDurationTextView.setText(separated[5]);
     }
 
     @Override
