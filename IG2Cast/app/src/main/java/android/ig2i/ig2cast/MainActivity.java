@@ -1,7 +1,15 @@
 package android.ig2i.ig2cast;
 
 
+
 import android.ig2i.ig2cast.activity.FragmentDrawer;
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 //import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -9,9 +17,16 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import android.widget.Toast;
+
 
 
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener{
@@ -22,12 +37,18 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     Toolbar mToolbar;
 
+    private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
+
+
     Toolbar toolbar;
     ViewPager pager;
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
-    CharSequence Titles[]={"Artistes","Albums","Morceaux","Playlists","Genres"};
+    public static MediaPlayer MP = new MediaPlayer();
+    CharSequence Titles[]={"Morceaux","Albums","Artistes","Playlists","Genres"};
     int Numboftabs =5;
+    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         /*********************************************/
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
+
         //setSupportActionBar(toolbar);
 
 
@@ -85,6 +107,21 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
+
+        //setController();
+
+        //permissions
+
+        int permissionCheck = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE);
+
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+        }
+
+
 
     }
 
@@ -113,5 +150,31 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     @Override
     public void onDrawerItemSelected(View view, int position) {
 
+    }
+
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                    Toast.makeText(MainActivity.this, "Permission allow to read your External storage", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(MainActivity.this, "Permission deny to read your External storage", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 }
