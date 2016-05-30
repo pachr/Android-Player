@@ -1,6 +1,8 @@
 package android.ig2i.ig2cast;
 
 
+
+import android.ig2i.ig2cast.activity.FragmentDrawer;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
@@ -12,23 +14,31 @@ import android.support.v4.view.ViewPager;
 //import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import android.widget.Toast;
 
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener{
 
     // Declaring Your View and Variables
 
+    private FragmentDrawer drawerFragment;
+
+    Toolbar mToolbar;
+
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
+
 
     Toolbar toolbar;
     ViewPager pager;
@@ -45,11 +55,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        /*********************************************/
+        /*          MAIN TOOLBAR                     */
+        /*********************************************/
 
         //getSupportActionBar().hide();//Ocultar ActivityBar anterior
 
         // Creating The Toolbar and setting it as the Toolbar for the activity
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
+        /*********************************************/
+        /*          MENU SLIDER RIGHT                */
+        /*********************************************/
+
+        drawerFragment = (FragmentDrawer)
+                getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
+        drawerFragment.setDrawerListener(this);
+
+
+        /*********************************************/
+        /*          TOOLBAR WITH SLIDER              */
+        /*********************************************/
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
 
@@ -118,6 +148,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onDrawerItemSelected(View view, int position) {
+
+    }
+
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
@@ -143,7 +177,4 @@ public class MainActivity extends AppCompatActivity {
             // permissions this app might request
         }
     }
-
-
-
 }
