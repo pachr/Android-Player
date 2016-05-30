@@ -22,6 +22,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
 
 
+
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -32,19 +33,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         public TextView mDurationTextView;
         public String mDataSource;
 
+
         public MyViewHolder(View v) {
             super(v);
 
             mCardView = (CardView) v.findViewById(R.id.card_view);
-
             mTitleTextView = (TextView) v.findViewById(R.id.tv_title);
             mArtistTextView = (TextView) v.findViewById(R.id.tv_artist);
             mDurationTextView= (TextView) v.findViewById(R.id.tv_duration);
 
 
+
             v.setOnClickListener(new View.OnClickListener(){
 
                 public void onClick(View v){
+
                     String arrayText;
                     arrayText = mTitleTextView.getText().toString();
                     Toast.makeText(v.getContext(), arrayText, Toast.LENGTH_SHORT).show();
@@ -55,6 +58,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                         MainActivity.MP.prepare();
                         MainActivity.MP.start();
 
+
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -62,6 +67,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
                 }
             });
+
         }
     }
 
@@ -77,6 +83,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_item, parent, false);
+
         // set the view's size, margins, paddings and layout parameters
         MyViewHolder vh = new MyViewHolder(v);
         return vh;

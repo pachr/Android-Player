@@ -17,8 +17,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
 import android.widget.Toast;
 
 
@@ -33,8 +35,9 @@ public class MainActivity extends AppCompatActivity {
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
     public static MediaPlayer MP = new MediaPlayer();
-    CharSequence Titles[]={"Artistes","Albums","Morceaux","Playlists","Genres"};
+    CharSequence Titles[]={"Morceaux","Albums","Artistes","Playlists","Genres"};
     int Numboftabs =5;
+    
 
 
     @Override
@@ -75,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
 
+        //setController();
+
         //permissions
 
         int permissionCheck = ContextCompat.checkSelfPermission(this,
@@ -85,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
         }
+
+
 
     }
 

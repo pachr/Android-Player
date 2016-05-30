@@ -5,8 +5,10 @@ import android.Manifest;
 import android.content.ContentResolver;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -22,8 +24,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.support.v7.widget.RecyclerView;
+import android.widget.MediaController.MediaPlayerControl;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -35,11 +43,12 @@ import java.util.List;
 public class Tab1 extends Fragment {
 
 
-    ListView mListView;
+    //ListView mListView;
 
    // private static final String INTERNAL_STORAGE = new String("/cust/Samples/Music/");
     //private static final String SD_PATH = new String ("");
     private List<String> songs = new ArrayList<String>();
+
 
     /*String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0";
 
@@ -65,7 +74,10 @@ public class Tab1 extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
+
+
 
     class Mp3Filter implements FilenameFilter{
         public boolean accept(File dir, String name){
@@ -144,6 +156,8 @@ public class Tab1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.tab_1,container,false);
+        final TextView playerTitle = (TextView) v.findViewById(R.id.player_title);
+        playerTitle.setText("--");
 
 
         RecyclerView rv = (RecyclerView) v.findViewById(R.id.rv_recycler_view);
@@ -187,54 +201,59 @@ public class Tab1 extends Fragment {
 
 
 
-        //MyAdapter adapter = new MyAdapter(new String[]{"test one", "test two", "test three", "test four", "test five" , "test six" , "test seven"});
-        //songs.add(null);
-
-
-
         MyAdapter adapter = new MyAdapter(songs);
         rv.setAdapter(adapter);
 
-        Button stopPlay = (Button) v.findViewById(R.id.BtnStop);
+
+        ImageButton stopPlay = (ImageButton) v.findViewById(R.id.BtnStop);
         stopPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(MainActivity.MP.isPlaying()){
+                if (MainActivity.MP.isPlaying()) {
                     MainActivity.MP.stop();
+                    playerTitle.setText("--");
+
+
                 }
             }
         });
 
-        Button startPlay = (Button) v.findViewById(R.id.BtnPlay);
+
+        ImageButton startPlay = (ImageButton) v.findViewById(R.id.BtnPlay);
         startPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(MainActivity.MP.isPlaying()){
+                if (MainActivity.MP.isPlaying()) {
                     MainActivity.MP.pause();
-                    
-                }
-                else {
-                    MainActivity.MP.start();
-                }
 
+                } else {
+                    MainActivity.MP.start();
+
+                }
 
 
             }
         });
+
+
+
 
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
-        
+
 
 
         //mListView = (ListView) v.findViewById(R.id.listView);
-       // mListView.setAdapter(new OrderAdapter(MixView.mixContext.getBaseContext(), R.layout.searchinnerlistlayout, MixView.dataView.dataHandler.markerList));
+        // mListView.setAdapter(new OrderAdapter(MixView.mixContext.getBaseContext(), R.layout.searchinnerlistlayout, MixView.dataView.dataHandler.markerList));
         //setContentView(R.layout.activity_main);
 
         return v;
     }
+
+
+
 
 }
 
