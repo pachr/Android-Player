@@ -63,7 +63,11 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
         // Creating The Toolbar and setting it as the Toolbar for the activity
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
+
+        if (mToolbar != null){
+            setSupportActionBar(mToolbar);
+        }
+        //setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
