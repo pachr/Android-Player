@@ -1,7 +1,6 @@
 package android.ig2i.ig2cast;
 
 
-
 import android.ig2i.ig2cast.activity.FragmentDrawer;
 import android.Manifest;
 import android.app.Activity;
@@ -28,8 +27,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 
-
-public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener{
+public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
 
     // Declaring Your View and Variables
 
@@ -45,9 +43,8 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
     public static MediaPlayer MP = new MediaPlayer();
-    CharSequence Titles[]={"Morceaux","Albums","Artistes","Playlists","Genres"};
-    int Numboftabs =5;
-    
+    CharSequence Titles[] = {"Morceaux", "Albums", "Artistes", "Playlists", "Genres"};
+    int Numboftabs = 5;
 
 
     @Override
@@ -64,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         // Creating The Toolbar and setting it as the Toolbar for the activity
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        if (mToolbar != null){
+        if (mToolbar != null) {
             setSupportActionBar(mToolbar);
         }
         //setSupportActionBar(mToolbar);
@@ -90,8 +87,8 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         //setSupportActionBar(toolbar);
 
 
-       // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+        // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
+        adapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs);
 
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
@@ -119,12 +116,11 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         int permissionCheck = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_EXTERNAL_STORAGE);
 
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED){
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
         }
-
 
 
     }

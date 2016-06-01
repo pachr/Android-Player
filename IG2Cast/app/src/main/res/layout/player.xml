@@ -10,43 +10,45 @@
         android:layout_width="fill_parent"
         android:layout_height="60dip"
         android:background="@color/colorPrimary"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
+        android:gravity="center"
         android:orientation="vertical"
-        android:gravity="center">
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
 
         <!-- Song Title -->
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/songTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="top|center"
+                android:paddingLeft="10dp"
+                android:text="The Good, The Bad And The Ugly"
                 android:textColor="#FFFFFF"
                 android:textSize="16dp"
-                android:paddingLeft="10dp"
-                android:textStyle="bold"
-                android:text="The Good, The Bad And The Ugly"
-                android:gravity="top|center"/>
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/songTitle">
+
             <TextView
                 android:id="@+id/songArtist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:text="The Good, The Bad And The Ugly"
                 android:textColor="#FFFFFF"
                 android:textSize="13dp"
-                android:paddingLeft="10dp"
-                android:textStyle="normal"
-                android:text="The Good, The Bad And The Ugly"
-                android:gravity="center"/>
+                android:textStyle="normal" />
         </LinearLayout>
     </LinearLayout>
 
@@ -55,14 +57,16 @@
         android:id="@+id/songThumbnail"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:layout_below="@id/player_header_bg"
         android:layout_marginBottom="100dp"
         android:gravity="center"
-        android:layout_below="@id/player_header_bg">
-        <ImageView android:layout_width="100dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/ic_default_album_art"/>
+            android:src="@drawable/ic_default_album_art" />
     </LinearLayout>
 
     <!-- Player Footer -->
@@ -71,35 +75,35 @@
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        android:gravity="center">
 
         <ImageButton
-            android:layout_height="60dp"
-            android:layout_width="60dp"
-            android:shadowColor="#C51162"
-            android:shadowDx="0"
-            android:shadowDy="0"
-            android:shadowRadius="5"
             android:id="@+id/BtnStop"
-            android:src="@drawable/ic_action_stop"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/buttonshape"
-            android:layout_marginRight="5dp"/>
-
-        <ImageButton
-            android:layout_height="60dp"
             android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/buttonshape"
             android:shadowColor="#C51162"
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="5"
+            android:src="@drawable/ic_action_stop" />
+
+        <ImageButton
             android:id="@+id/BtnPlay"
-            android:src="@drawable/playpausebtn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
+            android:layout_marginLeft="5dp"
             android:layout_toEndOf="@+id/BtnStop"
             android:background="@drawable/buttonshape"
-            android:layout_marginLeft="5dp"/>
+            android:shadowColor="#C51162"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:src="@drawable/playpausebtn" />
 
     </LinearLayout>
 
@@ -127,25 +131,25 @@
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="10dp">-->
 
-        <!-- Current Duration Label -->
-        <!--<TextView
-            android:id="@+id/songCurrentDurationLabel"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="left"
-            android:textColor="#eeeeee"
-            android:textStyle="bold"/>-->
-        <!-- Total Duration Label -->
-        <!--<TextView
-            android:id="@+id/songTotalDurationLabel"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:textColor="#04cbde"
-            android:textStyle="bold"/>
-    </LinearLayout>-->
+    <!-- Current Duration Label -->
+    <!--<TextView
+        android:id="@+id/songCurrentDurationLabel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:textColor="#eeeeee"
+        android:textStyle="bold"/>-->
+    <!-- Total Duration Label -->
+    <!--<TextView
+        android:id="@+id/songTotalDurationLabel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:textColor="#04cbde"
+        android:textStyle="bold"/>
+</LinearLayout>-->
 
     <!-- Repeat / Shuffle buttons -->
     <!--<LinearLayout
@@ -153,22 +157,22 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/timerDisplay"
         android:gravity="center">-->
-        <!-- Repeat Button -->
-       <!-- <ImageButton
-            android:id="@+id/btnRepeat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/btn_repeat"
-            android:layout_marginRight="5dp"
-            android:background="@null"/>-->
+    <!-- Repeat Button -->
+    <!-- <ImageButton
+         android:id="@+id/btnRepeat"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:src="@drawable/btn_repeat"
+         android:layout_marginRight="5dp"
+         android:background="@null"/>-->
 
-        <!-- Shuffle Button -->
-       <!-- <ImageButton
-            android:id="@+id/btnShuffle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/btn_shuffle"
-            android:layout_marginLeft="5dp"
-            android:background="@null"/>
-    </LinearLayout>-->
+    <!-- Shuffle Button -->
+    <!-- <ImageButton
+         android:id="@+id/btnShuffle"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:src="@drawable/btn_shuffle"
+         android:layout_marginLeft="5dp"
+         android:background="@null"/>
+ </LinearLayout>-->
 </RelativeLayout>
