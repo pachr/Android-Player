@@ -1,68 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-<!--<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textAppearance="?android:attr/textAppearanceMedium"
-    android:text="You Are In Tab 1"
-    android:id="@+id/textView"
-    android:layout_centerVertical="true"
-    android:layout_centerHorizontal="true" />
+    <!--<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="You Are In Tab 1"
+        android:id="@+id/textView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
-<ListView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/listView"
-    android:textAppearance="?android:attr/textAppearanceMedium"
-    android:layout_centerVertical="true"
-    android:layout_centerHorizontal="true"/>-->
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>-->
     <ExpandableListView
         android:id="@+id/lvExp"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"/>
-    <!--<TextView
-        android:id="@+id/player_title"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:text="@string/_title"
-        android:gravity="left|center"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/lvExp">
-    </TextView>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 
     <ImageButton
-        android:layout_height="40dp"
-        android:layout_width="40dp"
-        android:layout_weight="1"
         android:id="@+id/BtnStop"
-        android:src="@mipmap/stop"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentBottom="true"
+        android:layout_alignTop="@+id/player_title"
         android:layout_toEndOf="@+id/player_title"
-        android:layout_alignTop="@+id/player_title" />
+        android:layout_weight="1"
+        android:src="@mipmap/stop" />
 
     <ImageButton
-        android:layout_height="40dp"
-        android:layout_width="40dp"
-        android:layout_weight="1"
         android:id="@+id/BtnPlay"
-        android:src="@mipmap/play"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentBottom="true"
-
         android:layout_alignTop="@+id/player_title"
-        android:layout_toEndOf="@+id/BtnStop" />-->
+        android:layout_toEndOf="@+id/BtnStop"
 
-
-
+        android:layout_weight="1"
+        android:src="@mipmap/play" />
 
 </RelativeLayout>
-
-
-
-    <!---->
 
 

@@ -131,10 +131,7 @@ public class Tab2 extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.tab_1, container, false);
-        final TextView playerTitle = (TextView) v.findViewById(R.id.player_title);
-        playerTitle.setText("--");
-
+        View v = inflater.inflate(R.layout.tab_2, container, false);
 
        // RecyclerView rv = (RecyclerView) v.findViewById(R.id.rv_recycler_view);
         //rv.setHasFixedSize(true);
@@ -184,9 +181,9 @@ public class Tab2 extends Fragment {
         listAdapter = new ExpandableListAdapter(getContext(), listDataHeader, listDataChild);
 
         //BEUUUUUUUUUG
-        Toast.makeText(getContext(),listAdapter.toString(),Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(),listAdapter.toString(),Toast.LENGTH_LONG).show();
         // setting list adapter
-        //expListView.setAdapter(listAdapter);
+        expListView.setAdapter(listAdapter);
 
 
         ImageButton stopPlay = (ImageButton) v.findViewById(R.id.BtnStop);
@@ -196,9 +193,6 @@ public class Tab2 extends Fragment {
 
                 if (MainActivity.MP.isPlaying()) {
                     MainActivity.MP.stop();
-                    playerTitle.setText("--");
-
-
                 }
             }
         });
