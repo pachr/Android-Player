@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.ig2i.ig2cast.adapter.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -41,6 +42,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,10 +51,10 @@ import java.util.Map;
 public class Tab2 extends Fragment {
 
     private List<String> songs = new ArrayList<String>();
-    List<String> groupList;
-    List<String> childList;
-    Map<String, List<String>> laptopCollection;
+    ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
+    List<String> listDataHeader;
+    HashMap<String, List<String>> listDataChild;
 
 
     @Override
@@ -134,8 +136,8 @@ public class Tab2 extends Fragment {
         playerTitle.setText("--");
 
 
-        RecyclerView rv = (RecyclerView) v.findViewById(R.id.rv_recycler_view);
-        rv.setHasFixedSize(true);
+       // RecyclerView rv = (RecyclerView) v.findViewById(R.id.rv_recycler_view);
+        //rv.setHasFixedSize(true);
 
 
         ContentResolver cr = getActivity().getContentResolver();
@@ -169,30 +171,22 @@ public class Tab2 extends Fragment {
         }
 
 
-        MyAdapter adapter = new MyAdapter(songs);
-        rv.setAdapter(adapter);
+        //MyAdapter adapter = new MyAdapter(songs);
+        //rv.setAdapter(adapter);
 
-        /*createGroupList();
 
-        createCollection();
+        // get the listview
+        expListView = (ExpandableListView) v.findViewById(R.id.lvExp);
 
-        expListView = (ExpandableListView) v.findViewById(R.id.laptop_list);
-        final ExpandableListAdapter expListAdapter = new ExpandableListAdapter((Activity) this.getContext(), groupList, laptopCollection);
-        expListView.setAdapter(expListAdapter);
+        // preparing list data
+        prepareListData();
 
-        //setGroupIndicatorToRight();
+        listAdapter = new ExpandableListAdapter(getContext(), listDataHeader, listDataChild);
 
-        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-
-            public boolean onChildClick(ExpandableListView parent, View v,
-                                        int groupPosition, int childPosition, long id) {
-                final String selected = (String) expListAdapter.getChild(
-                        groupPosition, childPosition);
-                //Toast.makeText(getBaseContext(), selected, Toast.LENGTH_LONG).show();
-
-                return true;
-            }
-        });
+        //BEUUUUUUUUUG
+        Toast.makeText(getContext(),listAdapter.toString(),Toast.LENGTH_LONG).show();
+        // setting list adapter
+        //expListView.setAdapter(listAdapter);
 
 
         ImageButton stopPlay = (ImageButton) v.findViewById(R.id.BtnStop);
@@ -227,12 +221,8 @@ public class Tab2 extends Fragment {
         });
 
 
-
-
-
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-        rv.setLayoutManager(llm);
-
+       // LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+       // rv.setLayoutManager(llm);
 
 
         //mListView = (ListView) v.findViewById(R.id.listView);
@@ -242,76 +232,48 @@ public class Tab2 extends Fragment {
         return v;
     }
 
-    private void createGroupList() {
-        groupList = new ArrayList<String>();
-        groupList.add("HP");
-        groupList.add("Dell");
-        groupList.add("Lenovo");
-        groupList.add("Sony");
-        groupList.add("HCL");
-        groupList.add("Samsung");
+    /*
+     * Preparing the list data
+     */
+    private void prepareListData() {
+        listDataHeader = new ArrayList<String>();
+        listDataChild = new HashMap<String, List<String>>();
+
+        // Adding child data
+        listDataHeader.add("Top 250");
+        listDataHeader.add("Now Showing");
+        listDataHeader.add("Coming Soon..");
+
+        // Adding child data
+        List<String> top250 = new ArrayList<String>();
+        top250.add("The Shawshank Redemption");
+        top250.add("The Godfather");
+        top250.add("The Godfather: Part II");
+        top250.add("Pulp Fiction");
+        top250.add("The Good, the Bad and the Ugly");
+        top250.add("The Dark Knight");
+        top250.add("12 Angry Men");
+
+        List<String> nowShowing = new ArrayList<String>();
+        nowShowing.add("The Conjuring");
+        nowShowing.add("Despicable Me 2");
+        nowShowing.add("Turbo");
+        nowShowing.add("Grown Ups 2");
+        nowShowing.add("Red 2");
+        nowShowing.add("The Wolverine");
+
+        List<String> comingSoon = new ArrayList<String>();
+        comingSoon.add("2 Guns");
+        comingSoon.add("The Smurfs 2");
+        comingSoon.add("The Spectacular Now");
+        comingSoon.add("The Canyons");
+        comingSoon.add("Europa Report");
+
+        listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), nowShowing);
+        listDataChild.put(listDataHeader.get(2), comingSoon);
+
+
     }
 
-    private void createCollection() {
-        // preparing laptops collection(child)
-        String[] hpModels = { "HP Pavilion G6-2014TX", "ProBook HP 4540",
-                "HP Envy 4-1025TX" };
-        String[] hclModels = { "HCL S2101", "HCL L2102", "HCL V2002" };
-        String[] lenovoModels = { "IdeaPad Z Series", "Essential G Series",
-                "ThinkPad X Series", "Ideapad Z Series" };
-        String[] sonyModels = { "VAIO E Series", "VAIO Z Series",
-                "VAIO S Series", "VAIO YB Series" };
-        String[] dellModels = { "Inspiron", "Vostro", "XPS" };
-        String[] samsungModels = { "NP Series", "Series 5", "SF Series" };
-
-        laptopCollection = new LinkedHashMap<String, List<String>>();
-
-        for (String laptop : groupList) {
-            if (laptop.equals("HP")) {
-                loadChild(hpModels);
-            } else if (laptop.equals("Dell"))
-                loadChild(dellModels);
-            else if (laptop.equals("Sony"))
-                loadChild(sonyModels);
-            else if (laptop.equals("HCL"))
-                loadChild(hclModels);
-            else if (laptop.equals("Samsung"))
-                loadChild(samsungModels);
-            else
-                loadChild(lenovoModels);
-
-            laptopCollection.put(laptop, childList);
-        }
-    }
-
-    private void loadChild(String[] laptopModels) {
-        childList = new ArrayList<String>();
-        for (String model : laptopModels)
-            childList.add(model);
-    }
-
-    private void setGroupIndicatorToRight() {
-
-        DisplayMetrics dm = new DisplayMetrics();
-       // getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int width = dm.widthPixels;
-
-        expListView.setIndicatorBounds(width - getDipsFromPixel(35), width
-                - getDipsFromPixel(5));
-    }
-
-    // Convert pixel to dip
-    public int getDipsFromPixel(float pixels) {
-        // Get the screen's density scale
-        final float scale = getResources().getDisplayMetrics().density;
-        // Convert the dps to pixels, based on density scale
-        return (int) (pixels * scale + 0.5f);
-    }*/
-
-
-        return v;
-
-    }
 }
-
-
