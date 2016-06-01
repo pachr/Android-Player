@@ -57,8 +57,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
 
                         Intent MusicPlayerIntent = new Intent(v.getContext(), BuildingMusicPlayerActivity.class);
-                        MusicPlayerIntent.putExtra("firstKeyName","FirstKeyValue");
-                        MusicPlayerIntent.putExtra("secondKeyName","SecondKeyValue");
+                        MusicPlayerIntent.putExtra("mTitleTextView",mTitleTextView.getText().toString());
+                        MusicPlayerIntent.putExtra("mArtistTextView",mArtistTextView.getText().toString());
+                        MusicPlayerIntent.putExtra("mDurationTextView", mDurationTextView.getText().toString());
                         v.getContext().startActivity(MusicPlayerIntent);
 
                     } catch (IOException e) {
