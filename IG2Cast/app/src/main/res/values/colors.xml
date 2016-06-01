@@ -7,6 +7,7 @@
 
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#000000</color>
+    <color name="gray">#888888</color>
 
     <color name="mediumVioletRed">#C71585</color>
     <color name="deepPink">#FF1493</color>
