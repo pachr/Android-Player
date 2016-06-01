@@ -1,5 +1,7 @@
 package android.ig2i.ig2cast;
 
+import android.content.Intent;
+import android.ig2i.ig2cast.activity.BuildingMusicPlayerActivity;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.widget.CardView;
@@ -13,15 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private List<String> mDataset;
-
-
-
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -33,7 +33,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         public TextView mDurationTextView;
         public String mDataSource;
 
-
         public MyViewHolder(View v) {
             super(v);
 
@@ -41,8 +40,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             mTitleTextView = (TextView) v.findViewById(R.id.tv_title);
             mArtistTextView = (TextView) v.findViewById(R.id.tv_artist);
             mDurationTextView= (TextView) v.findViewById(R.id.tv_duration);
-
-
 
             v.setOnClickListener(new View.OnClickListener(){
 
@@ -59,6 +56,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                         MainActivity.MP.start();
 
 
+                        Intent MusicPlayerIntent = new Intent(v.getContext(), BuildingMusicPlayerActivity.class);
+                        MusicPlayerIntent.putExtra("firstKeyName","FirstKeyValue");
+                        MusicPlayerIntent.putExtra("secondKeyName","SecondKeyValue");
+                        v.getContext().startActivity(MusicPlayerIntent);
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -88,6 +89,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         MyViewHolder vh = new MyViewHolder(v);
         return vh;
     }
+
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {

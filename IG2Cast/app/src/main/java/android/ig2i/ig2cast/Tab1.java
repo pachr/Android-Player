@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -38,6 +39,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class Tab1 extends Fragment {
@@ -47,27 +49,7 @@ public class Tab1 extends Fragment {
 
    // private static final String INTERNAL_STORAGE = new String("/cust/Samples/Music/");
     //private static final String SD_PATH = new String ("");
-    private List<String> songs = new ArrayList<String>();
-
-
-    /*String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0";
-
-    String[] projection = {
-            MediaStore.Audio.Media._ID,
-            MediaStore.Audio.Media.ARTIST,
-            MediaStore.Audio.Media.TITLE,
-            MediaStore.Audio.Media.DATA,
-            MediaStore.Audio.Media.DISPLAY_NAME,
-            MediaStore.Audio.Media.DURATION
-    };
-
-    cursor = this.managedQuery(
-        MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-        projection,
-        selection,
-        null,
-        null);*/
-
+    private List<String> songs = new ArrayList<String>();;
 
 
     @Override
@@ -86,15 +68,6 @@ public class Tab1 extends Fragment {
     }
 
     private List<String> updateMusicList(Cursor cur) {
-        //File home = new File(INTERNAL_STORAGE);
-
-        /*if(home.listFiles(new Mp3Filter()).length >0) {
-            for (File file : home.listFiles(new Mp3Filter())){
-                songs.add((String) file.getName());
-            }
-
-            //songs.add("coucou test");
-        }*/
 
         while(cur.moveToNext()) {
 
@@ -146,7 +119,6 @@ public class Tab1 extends Fragment {
 
         }
 
-        //File home = new File(SD_PATH);
         return songs;
     }
 
@@ -156,13 +128,9 @@ public class Tab1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.tab_1,container,false);
-        final TextView playerTitle = (TextView) v.findViewById(R.id.player_title);
-        playerTitle.setText("--");
-
 
         RecyclerView rv = (RecyclerView) v.findViewById(R.id.rv_recycler_view);
         rv.setHasFixedSize(true);
-
 
 
         ContentResolver cr = getActivity().getContentResolver();
@@ -204,32 +172,34 @@ public class Tab1 extends Fragment {
         MyAdapter adapter = new MyAdapter(songs);
         rv.setAdapter(adapter);
 
+        /*
+        /*MP3 player Buttons
+         */
 
-        ImageButton stopPlay = (ImageButton) v.findViewById(R.id.BtnStop);
+        final ImageButton stopPlay = (ImageButton) v.findViewById(R.id.BtnStop);
         stopPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (MainActivity.MP.isPlaying()) {
                     MainActivity.MP.stop();
-                    playerTitle.setText("--");
-
-
                 }
             }
         });
 
 
-        ImageButton startPlay = (ImageButton) v.findViewById(R.id.BtnPlay);
+        final ImageButton startPlay = (ImageButton) v.findViewById(R.id.BtnPlay);
+        startPlay.setActivated(false);
         startPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (MainActivity.MP.isPlaying()) {
                     MainActivity.MP.pause();
+                    startPlay.setActivated(!startPlay.isActivated());
 
                 } else {
                     MainActivity.MP.start();
-
+                    startPlay.setActivated(!startPlay.isActivated());
                 }
 
 
