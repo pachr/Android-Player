@@ -1,6 +1,7 @@
 package android.ig2i.ig2cast.adapter;
 
 import android.content.Context;
+import android.ig2i.ig2cast.api.musiXmatchSDKActivity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.ig2i.ig2cast.MainActivity;
@@ -85,7 +86,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     MainActivity.MP.prepare();
                     MainActivity.MP.start();
 
-                    Intent MusicPlayerIntent = new Intent(v.getContext(), BuildingMusicPlayerActivity.class);
+                    Intent MusicPlayerIntent = new Intent(v.getContext(), musiXmatchSDKActivity.class);
                     MusicPlayerIntent.putExtra("mTitleTextView", txtListChild.getText().toString());
                     MusicPlayerIntent.putExtra("mArtistTextView", txtListChildArtist.getText().toString());
                     MusicPlayerIntent.putExtra("mDurationTextView", txtListChildDuration.getText().toString());
@@ -111,7 +112,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     MainActivity.MP.prepare();
                     MainActivity.MP.start();
 
-                    Intent MusicPlayerIntent = new Intent(v.getContext(), BuildingMusicPlayerActivity.class);
+                    Intent MusicPlayerIntent = new Intent(v.getContext(), musiXmatchSDKActivity.class);
                     MusicPlayerIntent.putExtra("mTitleTextView", txtListChild.getText().toString());
                     MusicPlayerIntent.putExtra("mArtistTextView", txtListChildArtist.getText().toString());
                     MusicPlayerIntent.putExtra("mDurationTextView", txtListChildDuration.getText().toString());
@@ -137,7 +138,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     MainActivity.MP.prepare();
                     MainActivity.MP.start();
 
-                    Intent MusicPlayerIntent = new Intent(v.getContext(), BuildingMusicPlayerActivity.class);
+                    Intent MusicPlayerIntent = new Intent(v.getContext(), musiXmatchSDKActivity.class);
                     MusicPlayerIntent.putExtra("mTitleTextView", txtListChild.getText().toString());
                     MusicPlayerIntent.putExtra("mArtistTextView", txtListChildArtist.getText().toString());
                     MusicPlayerIntent.putExtra("mDurationTextView", txtListChildDuration.getText().toString());
