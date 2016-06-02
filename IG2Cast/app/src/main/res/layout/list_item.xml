@@ -2,14 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="55dip"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:layout_margin="2dp">
 
     <TextView
         android:id="@+id/lblListItem"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="66dp"
         android:textSize="17dip"
-        android:paddingTop="5dp"
+        android:paddingTop="20dp"
         android:paddingBottom="5dp"
         android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft" />
 

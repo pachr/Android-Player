@@ -41,6 +41,7 @@ import org.w3c.dom.Text;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -54,6 +55,7 @@ public class Tab2 extends Fragment {
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
+    List<String> songAlbum;
     HashMap<String, List<String>> listDataChild;
 
 
@@ -91,7 +93,8 @@ public class Tab2 extends Fragment {
                                 + cur.getString(2) + "||"
                                 + cur.getString(3) + "||"
                                 + cur.getString(4) + "||"
-                                + csongs_duration);
+                                + csongs_duration + "||"
+                                + cur.getString(6));
 
                     } else {
                         String ccsongs_duration = String.valueOf(minutes) + ":" + String.valueOf(seconds);
@@ -101,7 +104,8 @@ public class Tab2 extends Fragment {
                                 + cur.getString(2) + "||"
                                 + cur.getString(3) + "||"
                                 + cur.getString(4) + "||"
-                                + ccsongs_duration);
+                                + ccsongs_duration + "||"
+                                + cur.getString(6));
 
                     }
                 } catch (NumberFormatException e) {
@@ -110,7 +114,8 @@ public class Tab2 extends Fragment {
                             + cur.getString(2) + "||"
                             + cur.getString(3) + "||"
                             + cur.getString(4) + "||"
-                            + cur.getString(5));
+                            + cur.getString(5) + "||"
+                            + cur.getString(6));
                 }
             } else {
                 String csongs_duration = "0";
@@ -119,7 +124,8 @@ public class Tab2 extends Fragment {
                         + cur.getString(2) + "||"
                         + cur.getString(3) + "||"
                         + cur.getString(4) + "||"
-                        + csongs_duration);
+                        + csongs_duration + "||"
+                        + cur.getString(6));
                 ;
             }
 
@@ -152,7 +158,8 @@ public class Tab2 extends Fragment {
                     MediaStore.Audio.Media.TITLE,
                     MediaStore.Audio.Media.DATA,
                     MediaStore.Audio.Media.DISPLAY_NAME,
-                    MediaStore.Audio.Media.DURATION
+                    MediaStore.Audio.Media.DURATION,
+                    MediaStore.Audio.Media.ALBUM
             };
 
             Cursor cur = cr.query(uri, projection, selection, null, sortOrder);
@@ -176,11 +183,11 @@ public class Tab2 extends Fragment {
         expListView = (ExpandableListView) v.findViewById(R.id.lvExp);
 
         // preparing list data
-        prepareListData();
+        prepareListData(songs);
 
-        listAdapter = new ExpandableListAdapter(getContext(), listDataHeader, listDataChild);
+        listAdapter = new ExpandableListAdapter(v, getContext(), listDataHeader, listDataChild);
 
-        //BEUUUUUUUUUG
+
         //Toast.makeText(getContext(),listAdapter.toString(),Toast.LENGTH_LONG).show();
         // setting list adapter
         expListView.setAdapter(listAdapter);
@@ -214,26 +221,54 @@ public class Tab2 extends Fragment {
             }
         });
 
-
-       // LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-       // rv.setLayoutManager(llm);
-
-
-        //mListView = (ListView) v.findViewById(R.id.listView);
-        // mListView.setAdapter(new OrderAdapter(MixView.mixContext.getBaseContext(), R.layout.searchinnerlistlayout, MixView.dataView.dataHandler.markerList));
-        //setContentView(R.layout.activity_main);
-
         return v;
     }
 
     /*
      * Preparing the list data
      */
-    private void prepareListData() {
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
+    private void prepareListData(List<String> songs) {
+        listDataHeader = new ArrayList<>();
+        listDataChild = new HashMap<>();
+        songAlbum = new ArrayList<>();
+        HashMap<String,List<String>> coucou = new HashMap<>();
 
-        // Adding child data
+        //ArrayList<String> songAlbum = new ArrayList<String>();
+
+
+        for (int i = 0; i < songs.size(); i++) {
+            //Separateur de la chaine récupérée
+            String[] separated = songs.get(i).toString().split("\\|\\|");
+
+            //Si DataHeader contient l'album on ne fait rien
+            if (listDataHeader.contains(separated[1].toString())) {
+
+
+            } else {
+                //Sinon, on ajoute l'album et on récupère les musiques de cet album
+                listDataHeader.add(separated[1].toString());
+                //Toast.makeText(getContext(),listDataHeader.toString(),Toast.LENGTH_LONG).show();
+                int k=1;
+                List<String> songAlbum2 = new ArrayList<>();
+                for (int j = 0; j < songs.size(); j++) {
+                    //On split la chaine pour en récupérer les éléments
+                    String[] separated2 = songs.get(j).split("\\|\\|");
+
+                    if (separated2[1].toString().equals(separated[1].toString())) {
+                        //Ajout dans le tableau à double entrée
+                        songAlbum2.add(songs.get(j).toString());
+
+
+                    }
+                }
+                listDataChild.put(separated[1].toString(), songAlbum2);
+
+            }
+        }
+
+
+
+  /*      // Adding child data
         listDataHeader.add("Top 250");
         listDataHeader.add("Now Showing");
         listDataHeader.add("Coming Soon..");
@@ -265,7 +300,8 @@ public class Tab2 extends Fragment {
 
         listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
         listDataChild.put(listDataHeader.get(1), nowShowing);
-        listDataChild.put(listDataHeader.get(2), comingSoon);
+        listDataChild.put(listDataHeader.get(2), comingSoon);*/
+
 
 
     }

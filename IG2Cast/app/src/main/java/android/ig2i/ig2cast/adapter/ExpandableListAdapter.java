@@ -2,13 +2,16 @@ package android.ig2i.ig2cast.adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.ig2i.ig2cast.MainActivity;
 import android.ig2i.ig2cast.R;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,12 +23,17 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private List<String> _listDataHeader; // header titles
     // child data in format of header title, child title
     private HashMap<String, List<String>> _listDataChild;
+    private View _view;
 
-    public ExpandableListAdapter(Context context, List<String> listDataHeader,
+    public ExpandableListAdapter(View v, Context context, List<String> listDataHeader,
                                  HashMap<String, List<String>> listChildData) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
+        this._view = v;
+
+
+
     }
 
     @Override
@@ -51,10 +59,41 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.list_item, null);
         }
 
-        TextView txtListChild = (TextView) convertView
+        final TextView txtListChild = (TextView) convertView
                 .findViewById(R.id.lblListItem);
 
+
         txtListChild.setText(childText);
+
+        txtListChild.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String arrayText;
+                arrayText = childText.toString();
+                //Toast.makeText(v.getContext(), arrayText, Toast.LENGTH_LONG).show();
+                String[] separated = arrayText.split("\\|\\|");
+
+                try {
+                    MainActivity.MP.reset();
+                    MainActivity.MP.setDataSource(separated[3]);
+                    MainActivity.MP.prepare();
+                    MainActivity.MP.start();
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        String arrayText;
+        arrayText = txtListChild.getText().toString();
+        String[] separated =  arrayText.split("\\|\\|");
+
+        txtListChild.setText(separated[2].toString());
+
+
+
         return convertView;
     }
 
