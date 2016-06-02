@@ -43,8 +43,10 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
     public static MediaPlayer MP = new MediaPlayer();
-    CharSequence Titles[] = {"Morceaux", "Albums", "Artistes", "Playlists", "Genres"};
-    int Numboftabs = 5;
+
+    CharSequence Titles[]={"Morceaux","Artistes","Albums","Playlists","Genres"};
+    int Numboftabs =5;
+
 
 
     @Override

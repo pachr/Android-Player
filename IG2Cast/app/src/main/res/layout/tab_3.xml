@@ -1,16 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="You Are In Tab 1"
+        android:id="@+id/textView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>-->
+    <ExpandableListView
+        android:id="@+id/lvExp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"/>
 
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textAppearance="?android:attr/textAppearanceMedium"
-    android:text="You Are In Tab 3"
-    android:id="@+id/textView"
-    android:layout_centerVertical="true"
-    android:layout_centerHorizontal="true" />
+    <LinearLayout
+        android:id="@+id/player_footer_bg"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:background="@color/colorPrimary">
+
+        <ImageButton
+            android:layout_height="60dp"
+            android:layout_width="60dp"
+            android:shadowColor="#C51162"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:id="@+id/BtnStop"
+            android:src="@drawable/ic_action_stop"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/buttonshape"
+            android:layout_marginRight="5dp"/>
+
+        <ImageButton
+            android:layout_height="60dp"
+            android:layout_width="60dp"
+            android:shadowColor="#C51162"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:id="@+id/BtnPlay"
+            android:src="@drawable/playpausebtn"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/BtnStop"
+            android:background="@drawable/buttonshape"
+            android:layout_marginLeft="5dp"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
+
+
