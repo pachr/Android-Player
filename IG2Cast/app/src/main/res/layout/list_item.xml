@@ -5,13 +5,64 @@
     android:orientation="vertical"
     android:layout_margin="2dp">
 
-    <TextView
-        android:id="@+id/lblListItem"
-        android:layout_width="fill_parent"
-        android:layout_height="66dp"
-        android:textSize="17dip"
-        android:paddingTop="20dp"
-        android:paddingBottom="5dp"
-        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_height="match_parent"
+            android:layout_width="70dp"
+            android:src="@drawable/ic_default_album_art">
+        </ImageView>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="250dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_toRightOf ="@+id/iv_image"
+                android:layout_width="250dp"
+                android:layout_height="30dp"
+                android:text="blah blah blah......"
+                android:gravity="left|center"
+                android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+                android:background="@color/gray"/>
+
+
+
+            <TextView
+                android:id="@+id/tv_artist"
+                android:layout_width="250dp"
+                android:layout_height="30dp"
+                android:text="blah blah blah......"
+                android:layout_below="@+id/tv_title"
+                android:layout_toRightOf="@+id/iv_image"
+                android:layout_toEndOf="@+id/iv_image"
+                android:gravity="left|center">
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_duration"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="14:35"
+                android:gravity="right|center"
+                android:layout_marginRight="5dp"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </LinearLayout>

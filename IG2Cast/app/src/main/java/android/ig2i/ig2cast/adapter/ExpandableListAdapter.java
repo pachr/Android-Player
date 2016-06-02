@@ -1,9 +1,11 @@
 package android.ig2i.ig2cast.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.ig2i.ig2cast.MainActivity;
 import android.ig2i.ig2cast.R;
+import android.ig2i.ig2cast.activity.BuildingMusicPlayerActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +62,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
         final TextView txtListChild = (TextView) convertView
-                .findViewById(R.id.lblListItem);
+                .findViewById(R.id.tv_title);
+
+        final TextView txtListChildArtist = (TextView) convertView
+                .findViewById(R.id.tv_artist);
+        final TextView txtListChildDuration = (TextView) convertView.findViewById(R.id.tv_duration);
 
 
         txtListChild.setText(childText);
@@ -79,6 +85,64 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     MainActivity.MP.prepare();
                     MainActivity.MP.start();
 
+                    Intent MusicPlayerIntent = new Intent(v.getContext(), BuildingMusicPlayerActivity.class);
+                    MusicPlayerIntent.putExtra("mTitleTextView", txtListChild.getText().toString());
+                    MusicPlayerIntent.putExtra("mArtistTextView", txtListChildArtist.getText().toString());
+                    MusicPlayerIntent.putExtra("mDurationTextView", txtListChildDuration.getText().toString());
+                    v.getContext().startActivity(MusicPlayerIntent);
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        txtListChildArtist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String arrayText;
+                arrayText = childText.toString();
+                //Toast.makeText(v.getContext(), arrayText, Toast.LENGTH_LONG).show();
+                String[] separated = arrayText.split("\\|\\|");
+
+                try {
+                    MainActivity.MP.reset();
+                    MainActivity.MP.setDataSource(separated[3]);
+                    MainActivity.MP.prepare();
+                    MainActivity.MP.start();
+
+                    Intent MusicPlayerIntent = new Intent(v.getContext(), BuildingMusicPlayerActivity.class);
+                    MusicPlayerIntent.putExtra("mTitleTextView", txtListChild.getText().toString());
+                    MusicPlayerIntent.putExtra("mArtistTextView", txtListChildArtist.getText().toString());
+                    MusicPlayerIntent.putExtra("mDurationTextView", txtListChildDuration.getText().toString());
+                    v.getContext().startActivity(MusicPlayerIntent);
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        txtListChildDuration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String arrayText;
+                arrayText = childText.toString();
+                //Toast.makeText(v.getContext(), arrayText, Toast.LENGTH_LONG).show();
+                String[] separated = arrayText.split("\\|\\|");
+
+                try {
+                    MainActivity.MP.reset();
+                    MainActivity.MP.setDataSource(separated[3]);
+                    MainActivity.MP.prepare();
+                    MainActivity.MP.start();
+
+                    Intent MusicPlayerIntent = new Intent(v.getContext(), BuildingMusicPlayerActivity.class);
+                    MusicPlayerIntent.putExtra("mTitleTextView", txtListChild.getText().toString());
+                    MusicPlayerIntent.putExtra("mArtistTextView", txtListChildArtist.getText().toString());
+                    MusicPlayerIntent.putExtra("mDurationTextView", txtListChildDuration.getText().toString());
+                    v.getContext().startActivity(MusicPlayerIntent);
+
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -86,11 +150,19 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             }
         });
 
+
+
         String arrayText;
         arrayText = txtListChild.getText().toString();
         String[] separated =  arrayText.split("\\|\\|");
 
         txtListChild.setText(separated[2].toString());
+
+
+        txtListChildArtist.setText(separated[1].toString());
+
+
+        txtListChildDuration.setText(separated[5].toString());
 
 
 
