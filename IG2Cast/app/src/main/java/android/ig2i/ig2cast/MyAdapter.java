@@ -55,6 +55,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                         MainActivity.MP.prepare();
                         MainActivity.MP.start();
 
+                        MainActivity.DataSource = mDataSource;
+
 
                         Intent MusicPlayerIntent = new Intent(v.getContext(), BuildingMusicPlayerActivity.class);
                         MusicPlayerIntent.putExtra("mTitleTextView",mTitleTextView.getText().toString());

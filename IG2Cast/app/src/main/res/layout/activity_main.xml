@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,52 +15,72 @@
 </RelativeLayout>-->
 
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawer_layout"
     android:orientation="vertical"
     tools:context="android.ig2i.ig2cast.MainActivity">
 
-        <LinearLayout
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+        <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <include
-                android:id="@+id/toolbar"
-                layout="@layout/toolbar" />
+                android:id="@+id/tool_bar"
+                layout="@layout/tool_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
+            <android.ig2i.ig2cast.SlidingTabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                >
-               <include
-                    android:id="@+id/tool_bar"
-                    layout="@layout/tool_bar"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    />
+                android:background="@color/colorPrimary"
+                android:elevation="2dp" />
 
-                <android.ig2i.ig2cast.SlidingTabLayout
-                    android:id="@+id/tabs"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:elevation="2dp"
-                    android:background="@color/colorPrimary"
-                    />
-            </RelativeLayout>
+        </RelativeLayout>
+
+       <LinearLayout
+            android:id="@+id/castLayout"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:gravity="center"
+            android:visibility="gone">
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/buttonTest"
+            android:src="@drawable/ic_cast_dark"
+            android:background="@drawable/buttonshape"
+            android:layout_gravity="center|center"/>
+
+        </LinearLayout>
+
+
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
-
-            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:layout_weight="1"
-            ></android.support.v4.view.ViewPager>
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+        </android.support.v4.view.ViewPager>
+
+
+
+    </LinearLayout>
 
     <fragment
         android:id="@+id/fragment_navigation_drawer"

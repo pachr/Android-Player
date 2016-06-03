@@ -1,4 +1,5 @@
 package android.ig2i.ig2cast.adapter;
+
 import android.content.Context;
 import android.ig2i.ig2cast.R;
 import android.ig2i.ig2cast.model.NavDrawerItem;

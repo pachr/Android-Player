@@ -281,7 +281,14 @@
     <string name="autoplaylist_playcounts_name" formatted="false">Top %d</string>
     <string name="permission_request_summary">Vanilla Music a besoin d\'une permission de lecture pour afficher votre bibliothèque musicale</string>
     <string name="ok">Ok</string>
+    <string name="load_lyrics">Voir les paroles</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="video_url">http://192.168.1.35:8080</string>
+    <string name="google_app_id">90E6CE62</string>
+    <string name="play_video">Play Video</string>
+    <string name="pause_video">Pause Video</string>
+    <string name="resume_video">Resume Video</string>
+    <string name="video_title">Paul\'s Chromecast Video Stream</string>
+    <string name="content_type_mp4">audio/mpeg</string>
+>>>>>>> Stashed changes
 </resources>
