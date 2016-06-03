@@ -1,10 +1,14 @@
 package android.ig2i.ig2cast;
 
 
+import android.content.ClipData;
+import android.content.Intent;
 import android.ig2i.ig2cast.activity.FragmentDrawer;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.ig2i.ig2cast.api.musiXmatchSDKActivity;
+import android.ig2i.ig2cast.api.musiXmatchSDKActivitySearch;
 import android.media.MediaPlayer;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
@@ -22,6 +26,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import android.widget.Toast;
@@ -42,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     ViewPager pager;
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
+    MenuItem search;
     public static MediaPlayer MP = new MediaPlayer();
 
     CharSequence Titles[]={"Morceaux","Artistes","Albums","Playlists","Genres"};
@@ -70,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
+
+
         /*********************************************/
         /*          MENU SLIDER RIGHT                */
         /*********************************************/
@@ -78,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
         drawerFragment.setDrawerListener(this);
+
+
 
 
         /*********************************************/
@@ -140,6 +151,21 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+
+        if (item.getTitle().equals("Search")){
+
+
+            //Toast.makeText(getBaseContext(),"Coucou",Toast.LENGTH_LONG).show();
+            Intent search_activity = new Intent(getBaseContext(), android.ig2i.ig2cast.SearchActivity.class);
+
+            search_activity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            getBaseContext().startActivity(search_activity);
+
+        }
+
+
 
         //noinspection SimplifiableIfStatement
         /*if (id == R.id.action_settings) {
