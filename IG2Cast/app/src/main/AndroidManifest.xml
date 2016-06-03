@@ -29,6 +29,16 @@
         <activity
             android:name=".api.musiXmatchSDKActivity"/>
 
+        <activity
+            android:name=".api.musiXmatchSDKActivitySearch"/>
+
+        <activity
+            android:name=".activity.ViewSearch"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".SearchActivity"/>
+
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
