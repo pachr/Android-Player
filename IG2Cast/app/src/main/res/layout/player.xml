@@ -59,10 +59,10 @@
         android:layout_height="fill_parent"
         android:layout_below="@id/player_header_bg"
         android:layout_marginBottom="185dp"
-        android:gravity="center"
-        android:orientation="vertical"
         android:paddingBottom="10dp"
-        android:paddingTop="10dp">
+        android:paddingTop="10dp"
+        android:orientation="vertical"
+        android:gravity="center">
 
         <ImageView
             android:layout_width="100dp"

@@ -2,6 +2,7 @@ package android.ig2i.ig2cast;
 
 import android.content.Intent;
 import android.ig2i.ig2cast.activity.BuildingMusicPlayerActivity;
+import android.ig2i.ig2cast.api.musiXmatchSDKActivity;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.widget.CardView;
@@ -58,11 +59,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                         MainActivity.DataSource = mDataSource;
 
 
-                        Intent MusicPlayerIntent = new Intent(v.getContext(), BuildingMusicPlayerActivity.class);
+                        /*Intent MusicPlayerIntent = new Intent(v.getContext(), BuildingMusicPlayerActivity.class);
                         MusicPlayerIntent.putExtra("mTitleTextView",mTitleTextView.getText().toString());
                         MusicPlayerIntent.putExtra("mArtistTextView",mArtistTextView.getText().toString());
                         MusicPlayerIntent.putExtra("mDurationTextView", mDurationTextView.getText().toString());
-                        v.getContext().startActivity(MusicPlayerIntent);
+                        v.getContext().startActivity(MusicPlayerIntent);*/
+
+
+                        Intent MusicXMatchAPI = new Intent(v.getContext(), musiXmatchSDKActivity.class);
+                        MusicXMatchAPI.putExtra("mTitleTextView",mTitleTextView.getText().toString());
+                        MusicXMatchAPI.putExtra("mArtistTextView",mArtistTextView.getText().toString());
+                        MusicXMatchAPI.putExtra("mDurationTextView", mDurationTextView.getText().toString());
+                        v.getContext().startActivity(MusicXMatchAPI);
 
                     } catch (IOException e) {
                         e.printStackTrace();
